@@ -4,6 +4,12 @@
 
 #import <AppKit/AppKit.h>
 
+// NSUserInterfaceItemIdentifier is only definined in macOS 10.13+. We need
+// to define it ourselves if we're on macOS Sierra or lower.
+#if !defined(MAC_OS_X_VERSION_10_13)
+typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -14,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * Unique identifier of the Panel represented by the view controller.
  */
-@property (nonatomic, readonly, nullable) NSString *identifier;
+@property (nonatomic, readonly, nullable) NSUserInterfaceItemIdentifier identifier;
 
 /*!
  * Toolbar icon for the Panel represented by the view controller.
